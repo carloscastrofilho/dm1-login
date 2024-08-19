@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
 
   logo: {
     width: 140,
-    height: 140,
+    height: 141,
   },
   titulo: {
     fontSize: 32,
