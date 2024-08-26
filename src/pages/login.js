@@ -15,7 +15,7 @@ export default function Login({navigation}) {
     <View style={styles.container}>
       <Image style={styles.image} source={icon} />
       <View style={styles.body}>
-        <Text style={styles.title}>Login</Text>
+        <Text style={styles.title}>Login 2608</Text>
         <View style={styles.areaInput}>
           <TextInput
             style={styles.textField}

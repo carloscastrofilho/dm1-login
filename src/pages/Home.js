@@ -8,45 +8,29 @@ import {
   TextInput,
 } from "react-native";
 
-
 const icon = require("../../assets/favicon.png");
 
-export default function Register({navigation}) {
+export default function Home({navigation}) {
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={icon} />
+      
       <View style={styles.body}>
-        <Text style={styles.title}>Registro</Text>
+        <Text style={styles.title}>Home</Text>
         <View style={styles.areaInput}>
-          <TextInput
-            style={styles.textField}
-            placeholder=" informe seu Email"
-            keyboardType="email-address"
-          />
-          <TextInput
-            style={styles.textField}
-            placeholder="informe sua senha"
-            keyboardType="default"
-            secureTextEntry
-          />
-          <TextInput
-            style={styles.textField}
-            placeholder="repita a senha"
-            keyboardType="default"
-            secureTextEntry
-          />
+        <Text>area principal</Text>
+        <Text>area principal</Text>
+        <Text>area principal</Text>
+        <Text>area principal</Text>
+          
           <TouchableOpacity style={styles.button}
-           onPress={() =>
-            navigation.navigate('Home', {name: 'home'})
+             onPress={() =>
+                navigation.navigate('Login', {name: 'Sair'})
           }
-          >
+           >
             <Text style={([styles.buttonText], { color: "#fff" })}>
-              Registrar
+              Sair
             </Text>
           </TouchableOpacity>
-
-          <View style={styles.rodape}>
-          </View>
         </View>
       </View>
       <StatusBar style="auto" />
