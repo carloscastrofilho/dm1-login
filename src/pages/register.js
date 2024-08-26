@@ -8,7 +8,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-const Register = () => {
+
+const Register = ({navigation}) => {
   return (
     <View style={styles.container}>
   <Image source={require("../../assets/favicon.png")} style={styles.logo} />
@@ -40,7 +41,10 @@ const Register = () => {
         ></TextInput>
 
         </View>
-        <TouchableOpacity style={styles.btn}>
+        <TouchableOpacity style={styles.btn} 
+          onPress={() =>
+            navigation.navigate("Home", { name:"Home" })}
+        >
           <Text style={styles.btnTexto}>Acessar</Text>
         </TouchableOpacity>
         <View style={styles.contasContainer}>

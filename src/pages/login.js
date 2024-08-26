@@ -16,7 +16,7 @@ const Login = ({navigation}) => {
       <View style={styles.inputsContainer}>
         <View>
           <Text style={styles.label}>Email:</Text>
-          <TextInput
+          <TextInput 
             style={styles.inputs}
             placeholder="Digite seu Email"
           ></TextInput>
@@ -29,17 +29,20 @@ const Login = ({navigation}) => {
             placeholder="Digite sua Senha"
           ></TextInput>
         </View>
-        <TouchableOpacity style={styles.btn}>
+        <TouchableOpacity style={styles.btn}   onPress={() =>
+              navigation.navigate("Home", { name:"Home" })}   > 
           <Text style={styles.btnTexto}>Acessar</Text>
         </TouchableOpacity>
         <View style={styles.contasContainer}>
           <Text>Não possui conta?</Text>
           <TouchableOpacity
             onPress={() =>
-              navigation.navigate("Register", { name: "Registro" })
+              navigation.navigate("Register", { name:"Registro" })
             }
-            style={styles.inscricao}
+            
+        
           >
+           <Text style={styles.register}>Registro</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -93,7 +96,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
-  inscricao: {
+  register: {
     color: "#4169E1",
   },
 });
