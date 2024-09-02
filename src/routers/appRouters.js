@@ -5,7 +5,7 @@ import Home from "../pages/Home";
 
 const Stack = createNativeStackNavigator();
 
-export default function StackerNavigation(){
+export default function AppRouters(){
    return(
     <Stack.Navigator>
         <Stack.Screen

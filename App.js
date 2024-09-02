@@ -1,11 +1,10 @@
 import { NavigationContainer } from '@react-navigation/native';
-import StackerNavigation from './src/components/StackerNavigation';
-
+import Routers from './src/routers/routers';
 
 export default function App() {
   return (
     <NavigationContainer> 
-      <StackerNavigation />    
+       <Routers />
     </NavigationContainer>    
   );
 }
