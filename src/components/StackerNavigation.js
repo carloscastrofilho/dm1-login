@@ -3,7 +3,6 @@ import Login from "../pages/login";
 import Register from "../pages/register";
 import Home from "../pages/Home";
 
-
 const Stack = createNativeStackNavigator();
 
 export default function StackerNavigation(){
