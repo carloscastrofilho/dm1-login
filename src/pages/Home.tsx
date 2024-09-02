@@ -1,4 +1,5 @@
 import { StatusBar } from "expo-status-bar";
+import React, { useContext } from "react";
 import {
   StyleSheet,
   Text,
@@ -7,34 +8,38 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
+import AuthContext from "../contexts/auth";
 
 const icon = require("../../assets/favicon.png");
 
-export default function Home({navigation}) {
+const Home: React.FC = ({navigation}) => {
+  const { signed, token } = useContext(AuthContext);
+
+  console.log( signed);
+  console.log( token );
+
   return (
-    <View style={styles.container}>
-      
-      <View style={styles.body}>
-        <Text style={styles.title}>Home</Text>
-        <View style={styles.areaInput}>
-        <Text>area principal</Text>
-        <Text>area principal</Text>
-        <Text>area principal</Text>
-        <Text>area principal</Text>
-          
-          <TouchableOpacity style={styles.button}
-             onPress={() =>
-                navigation.navigate('Login', {name: 'Sair'})
-          }
-           >
-            <Text style={([styles.buttonText], { color: "#fff" })}>
-              Sair
-            </Text>
-          </TouchableOpacity>
+      <View style={styles.container}>
+        
+        <View style={styles.body}>
+          <Text style={styles.title}>Home</Text>
+          <View style={styles.areaInput}>
+          <Text>area principal</Text>
+          <Text>{signed}</Text>
+          <Text>{token}</Text>
+          <Text>area principal</Text>
+            
+            <TouchableOpacity style={styles.button}
+               onPress={() => navigation.navigate('Login', {name: 'Sair'}) }
+             >
+              <Text style={(styles.buttonText)}>
+                Sair / Finalizar
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
+        <StatusBar style="auto" />
       </View>
-      <StatusBar style="auto" />
-    </View>
   );
 }
 
@@ -48,7 +53,6 @@ const styles = StyleSheet.create({
   body: {
     height: "60%",
     width: "100%",
-    justifyContent: "space_around",
     alignItems: "center",
   },
   image: {
@@ -92,5 +96,13 @@ const styles = StyleSheet.create({
 
   rodapeText: {
     fontSize: 11,
+    color: "black"
+  },
+  buttonText: {
+    fontSize: 18,
+    color: "black",
+    fontWeight: "bold"
   },
 });
+
+export default Home;

@@ -1,4 +1,6 @@
 import { StatusBar } from "expo-status-bar";
+import { useContext } from "react";
+import AuthContext from "../contexts/auth";
 import {
   StyleSheet,
   Text,
@@ -8,50 +10,58 @@ import {
   TextInput,
 } from "react-native";
 
-
 const icon = require("../../assets/favicon.png");
 
-export default function Register({navigation}) {
+const Login: React.FC = ({navigation}) => {
+ 
+  const { signed, token } = useContext(AuthContext);
+
+  console.log( signed);
+  console.log( token );
+
   return (
     <View style={styles.container}>
       <Image style={styles.image} source={icon} />
       <View style={styles.body}>
-        <Text style={styles.title}>Registro</Text>
+        <Text style={styles.title}>Login 2608</Text>
         <View style={styles.areaInput}>
           <TextInput
             style={styles.textField}
-            placeholder=" informe seu Email"
+            placeholder="Email"
             keyboardType="email-address"
           />
           <TextInput
             style={styles.textField}
-            placeholder="informe sua senha"
-            keyboardType="default"
-            secureTextEntry
-          />
-          <TextInput
-            style={styles.textField}
-            placeholder="repita a senha"
+            placeholder="Password"
             keyboardType="default"
             secureTextEntry
           />
           <TouchableOpacity style={styles.button}
-           onPress={() =>
-            navigation.navigate('Home', {name: 'home'})
-          }
-          >
-            <Text style={([styles.buttonText], { color: "#fff" })}>
-              Registrar
+             onPress={() =>
+                navigation.navigate('Home', {name: 'home'})
+    }
+           >
+            <Text style={(styles.buttonText, { color: "#fff" })}>
+              Acessar
             </Text>
           </TouchableOpacity>
 
           <View style={styles.rodape}>
+            <Text style={styles.rodapeText}>Não possui conta?</Text>
+            
+            <TouchableOpacity onPress={() =>
+                    navigation.navigate('Registro', {name: 'registro'})
+            }>
+              <Text style={(styles.rodapeText, { color: "#00002" })}>
+                faça sua inscrição ...!
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
       <StatusBar style="auto" />
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -61,27 +71,31 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+
   body: {
     height: "60%",
     width: "100%",
-    justifyContent: "space_around",
     alignItems: "center",
   },
+
   image: {
     height: "20%",
     width: "100%",
     resizeMode: "contain",
   },
+
   areaInput: {
     width: "100%",
     height: "80%",
     alignItems: "center",
     justifyContent: "space-evenly",
   },
+
   title: {
     fontSize: 32,
     marginTop: 15,
   },
+
   textField: {
     borderColor: "#000",
     borderWidth: 1,
@@ -90,6 +104,7 @@ const styles = StyleSheet.create({
     height: 50,
     paddingHorizontal: 10,
   },
+
   button: {
     backgroundColor: "#778eec",
     borderRadius: 10,
@@ -99,14 +114,25 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     textAlign: "center",
   },
+
   rodape: {
     flexDirection: "row",
     width: "62.75%",
     justifyContent: "space-evenly",
     alignItems: "center",
+    gap: 20,
   },
 
   rodapeText: {
-    fontSize: 11,
+    fontSize: 18,
+    fontWeight: "bold",
   },
+
+  buttonText : {
+    fontSize: 11,
+    color: "red",
+  }
+
 });
+
+export default Login;

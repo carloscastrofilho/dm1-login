@@ -1,4 +1,5 @@
 import { StatusBar } from "expo-status-bar";
+import React from "react";
 import {
   StyleSheet,
   Text,
@@ -8,52 +9,48 @@ import {
   TextInput,
 } from "react-native";
 
+
 const icon = require("../../assets/favicon.png");
 
-export default function Login({navigation}) {
-  return (
+const Register: React.FC = ({navigation}) => (
     <View style={styles.container}>
       <Image style={styles.image} source={icon} />
       <View style={styles.body}>
-        <Text style={styles.title}>Login 2608</Text>
+        <Text style={styles.title}>Registro</Text>
         <View style={styles.areaInput}>
           <TextInput
             style={styles.textField}
-            placeholder="Email"
+            placeholder=" informe seu Email"
             keyboardType="email-address"
           />
           <TextInput
             style={styles.textField}
-            placeholder="Password"
+            placeholder="informe sua senha"
+            keyboardType="default"
+            secureTextEntry
+          />
+          <TextInput
+            style={styles.textField}
+            placeholder="repita a senha"
             keyboardType="default"
             secureTextEntry
           />
           <TouchableOpacity style={styles.button}
-             onPress={() =>
-                navigation.navigate('Home', {name: 'home'})
-    }
-           >
-            <Text style={([styles.buttonText], { color: "#fff" })}>
-              Acessar
+           onPress={() =>  navigation.navigate('Home', {name: 'home'})
+          }
+          >
+            <Text style={(styles.buttonText)}>
+              Registrar
             </Text>
           </TouchableOpacity>
 
           <View style={styles.rodape}>
-            <Text style={styles.rodapeText}>Não possui conta?</Text>
-            <TouchableOpacity onPress={() =>
-                    navigation.navigate('Registro', {name: 'registro'})
-            }>
-              <Text style={([styles.rodapeText], { color: "#778eec" })}>
-                faça sua inscrição ...!
-              </Text>
-            </TouchableOpacity>
           </View>
         </View>
       </View>
       <StatusBar style="auto" />
     </View>
-  );
-}
+ );
 
 const styles = StyleSheet.create({
   container: {
@@ -65,7 +62,6 @@ const styles = StyleSheet.create({
   body: {
     height: "60%",
     width: "100%",
-    justifyContent: "space_around",
     alignItems: "center",
   },
   image: {
@@ -110,4 +106,11 @@ const styles = StyleSheet.create({
   rodapeText: {
     fontSize: 11,
   },
+  buttonText : {
+    fontSize: 18,
+    color: "red",
+    fontWeight: "bold"
+  }
 });
+
+export default Register;
