@@ -1,4 +1,5 @@
 import { StatusBar } from "expo-status-bar";
+import { useContext } from "react";
 import {
   StyleSheet,
   Text,
@@ -7,11 +8,12 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
+import AuthContext from '../contexts/auth' 
 
 const icon = require("../../assets/favicon.png");
 
 const Home = ({navigation}) => {
-  
+  const { signed, email, token } = useContext(AuthContext)
   return (
       <View style={styles.container}>
         
@@ -19,9 +21,11 @@ const Home = ({navigation}) => {
           <Text style={styles.title}>Home</Text>
           <View style={styles.areaInput}>
           <Text>area principal</Text>
-          <Text> logado </Text>
-          <Text> token : adoamdo oadsmvoasd mvaos dvmoas</Text>
-          <Text>area principal</Text>
+          <Text>  - - - - - - - - - - - - - </Text>
+          <Text> email : {email} </Text>
+          <Text> logado : {signed} </Text>
+          <Text> token : {token}</Text>
+          <Text> - - - - - - - - - - - - - </Text>
             
             <TouchableOpacity style={styles.button}
                onPress={() => navigation.navigate('Login', {name: 'Sair'}) }
