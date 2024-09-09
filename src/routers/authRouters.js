@@ -1,7 +1,6 @@
-import Login from "../pages/login";
-// import Register from "../pages/register";
-import Home from "../pages/Home";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Login from "../pages/login";
+import Home from "../pages/Home";
 
 const Tab = createBottomTabNavigator();
 
