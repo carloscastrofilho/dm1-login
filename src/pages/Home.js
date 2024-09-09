@@ -9,11 +9,13 @@ import {
   TextInput,
 } from "react-native";
 import AuthContext from '../contexts/auth' 
+import PersonContext, { PersonProvider } from "../contexts/person";
 
 const icon = require("../../assets/favicon.png");
 
 const Home = ({navigation}) => {
   const { signed, email, token } = useContext(AuthContext)
+  const { name, telefone, cep } = useContext(PersonContext)
   return (
       <View style={styles.container}>
         
@@ -25,6 +27,13 @@ const Home = ({navigation}) => {
           <Text> email : {email} </Text>
           <Text> logado : {signed} </Text>
           <Text> token : {token}</Text>
+          <Text> - - - - - - - - - - - - - </Text>
+
+          <Text>Dados usuario</Text>
+          <Text>  - - - - - - - - - - - - - </Text>
+          <Text> nome : {name} </Text>
+          <Text> telefone : {telefone} </Text>
+          <Text> cep : {cep}</Text>
           <Text> - - - - - - - - - - - - - </Text>
             
             <TouchableOpacity style={styles.button}
