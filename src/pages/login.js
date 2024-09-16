@@ -17,7 +17,7 @@ const Login = ({navigation}) => {
     <View style={styles.container}>
       <Image style={styles.image} source={icon} />
       <View style={styles.body}>
-        <Text style={styles.title}>Login 2608</Text>
+        <Text style={styles.title}>Login 16/09/24</Text>
         <View style={styles.areaInput}>
           <TextInput
             style={styles.textField}
