@@ -7,11 +7,20 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
+import { LoginUsuario } from "../services/auth-firebase";
 
 const icon = require("../../assets/favicon.png");
 
-const Login = ({navigation}) => {
- 
+const Login = ({navigation}) => {  
+
+  const onClickEntrar = async ()=>{  
+    const userLogin = await LoginUsuario();
+    // navigation.navigate('Home', {name: 'home'})
+  }
+
+  const OnClickRegistrar = ()=>{
+    navigation.navigate('Registro', {name: 'registro'})
+  } 
   
   return (
     <View style={styles.container}>
@@ -31,10 +40,7 @@ const Login = ({navigation}) => {
             secureTextEntry
           />
           <TouchableOpacity style={styles.button}
-             onPress={() =>
-                navigation.navigate('Home', {name: 'home'})
-    }
-           >
+             onPress={onClickEntrar} >
             <Text style={(styles.buttonText, { color: "#fff" })}>
               Acessar
             </Text>
@@ -43,9 +49,7 @@ const Login = ({navigation}) => {
           <View style={styles.rodape}>
             <Text style={styles.rodapeText}>Não possui conta?</Text>
             
-            <TouchableOpacity onPress={() =>
-                    navigation.navigate('Registro', {name: 'registro'})
-            }>
+            <TouchableOpacity onPress={OnClickRegistrar }>
               <Text style={(styles.rodapeText, { color: "#00002" })}>
                 faça sua inscrição ...!
               </Text>
