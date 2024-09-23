@@ -9,10 +9,14 @@ import {
 } from "react-native";
 import { LoginUsuario } from "../services/auth-firebase";
 import { getAllUser, newUserFatec } from "../services/realtime-database";
+import { useState } from "react";
 
   const icon = require("../../assets/favicon.png");
 
   const Login = ({navigation}) => {  
+
+    const [ email, setEmail] = useState("");
+    const [ password, setPassword] = useState("");
 
     const onGetAllUser = async ()=>{
       const lista = getAllUser()
@@ -22,8 +26,8 @@ import { getAllUser, newUserFatec } from "../services/realtime-database";
     const newuser =  newUserFatec()
   }
   const onClickEntrar = async ()=>{  
-    const userLogin = await LoginUsuario();
-    // navigation.navigate('Home', {name: 'home'})
+    console.log( email, password ) ;
+    const userLogin = await LoginUsuario(email, password);
   }
 
   const OnClickRegistrar = ()=>{
@@ -34,18 +38,22 @@ import { getAllUser, newUserFatec } from "../services/realtime-database";
     <View style={styles.container}>
       <Image style={styles.image} source={icon} />
       <View style={styles.body}>
-        <Text style={styles.title}>Login 16/09/24</Text>
+        <Text style={styles.title}>Login 23/09/24</Text>
         <View style={styles.areaInput}>
           <TextInput
+            name = "email"
             style={styles.textField}
             placeholder="Email"
             keyboardType="email-address"
+            onChangeText={ text => setEmail(text) }
           />
           <TextInput
+            name = "password"
             style={styles.textField}
             placeholder="Password"
             keyboardType="default"
             secureTextEntry
+            onChangeText={ text => setPassword(text)}
           />
           <TouchableOpacity style={styles.button}
              onPress={onClickEntrar} >

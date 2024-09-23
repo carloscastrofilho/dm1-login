@@ -4,14 +4,23 @@ import {
 } from "firebase/auth";
 import { auth } from "../services/database/firebase";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useContext } from "react";
+import AuthContext from "../contexts/auth";
+import { set } from "firebase/database";
 
-export async function LoginUsuario() {
+export async function LoginUsuario(email, password) {
+	// const { setSigned, setUserEmail } = useContext(AuthContext);
 	const usuario = await signInWithEmailAndPassword(
 		auth,
-		"teste@gmail.com",
-		"123456789",
+		email,
+		password,
 	);
 	console.log(usuario);
+	// if (usuario) {
+	// 	// setSigned( true )
+	// 	// setUserEmail( usuario.email)
+	// }
+	
 	return usuario;
 }
 
@@ -27,7 +36,7 @@ export async function LogoutUsuaro() {
 		});
 }
 
-export async function RegistarUsuario() {
+export async function RegistarUsuario(email, password) {
 	await createUserWithEmailAndPassword(auth, email, password)
 		.then((userCredential) => {
 			// Signed in
