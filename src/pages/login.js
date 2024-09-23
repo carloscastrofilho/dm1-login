@@ -8,11 +8,19 @@ import {
   TextInput,
 } from "react-native";
 import { LoginUsuario } from "../services/auth-firebase";
+import { getAllUser, newUserFatec } from "../services/realtime-database";
 
-const icon = require("../../assets/favicon.png");
+  const icon = require("../../assets/favicon.png");
 
-const Login = ({navigation}) => {  
+  const Login = ({navigation}) => {  
 
+    const onGetAllUser = async ()=>{
+      const lista = getAllUser()
+      // console.log(lista)
+    }
+  const onNewUserFatec = async () =>{
+    const newuser =  newUserFatec()
+  }
   const onClickEntrar = async ()=>{  
     const userLogin = await LoginUsuario();
     // navigation.navigate('Home', {name: 'home'})
@@ -45,6 +53,20 @@ const Login = ({navigation}) => {
               Acessar
             </Text>
           </TouchableOpacity>
+
+          {/* <TouchableOpacity style={styles.button}
+             onPress={onNewUserFatec} >
+            <Text style={(styles.buttonText, { color: "#fff" })}>
+              teste
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.button}
+             onPress={onGetAllUser} >
+            <Text style={(styles.buttonText, { color: "#fff" })}>
+              lista usuarios 
+            </Text>
+          </TouchableOpacity> */}
 
           <View style={styles.rodape}>
             <Text style={styles.rodapeText}>Não possui conta?</Text>
