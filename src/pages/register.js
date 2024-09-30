@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -8,19 +8,24 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
-import { RegistarUsuario } from "../services/auth-firebase";
+import AuthContext from "../contexts/auth";
 
-
-const icon = require("../../assets/favicon.png");
+const icon = require("../../assets/logosi.png");
 
 const Register= ({navigation}) => {
+
   const [ email, setEmail] = useState("");
   const [ password, setPassword] = useState("")
   const [ password2, setPassword2] = useState("")
+  const { createUser } = useContext(AuthContext)
+
+  const handleReturnLogin = () => {
+    navigation.navigate("Login", { name: "login" });
+  }
   
   async function handleOnClick(){
-    console.log( email, password, password2)
-    await RegistarUsuario(email, password);
+    const usuario = await createUser(email, password);
+    // console.log(usuario);
   }
 
   return (
@@ -59,6 +64,20 @@ const Register= ({navigation}) => {
              Registrar
            </Text>
          </TouchableOpacity>
+
+         <View style={styles.rodape}>
+            <Text style={styles.rodapeText}>Já possui conta? {"   "}</Text>
+            <TouchableOpacity onPress={handleReturnLogin}>
+              <Text
+                style={
+                  (styles.rodapeText,
+                  { color: "#000", fontWeight: 700, fontSize: 16 })
+                }
+              >
+                Voltar ao login
+              </Text>
+            </TouchableOpacity>
+          </View>
   
          <View style={styles.rodape}>
          </View>
@@ -69,8 +88,6 @@ const Register= ({navigation}) => {
   );
 }
   
-  
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -78,26 +95,36 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+
   body: {
     height: "60%",
     width: "100%",
     alignItems: "center",
   },
+
   image: {
-    height: "20%",
-    width: "100%",
-    resizeMode: "contain",
+    height: 230, 
+    width: 230,  
+    borderRadius: 75, 
+    resizeMode: "cover", 
+    marginTop: 15,
   },
+
   areaInput: {
     width: "100%",
     height: "80%",
     alignItems: "center",
     justifyContent: "space-evenly",
   },
+
   title: {
     fontSize: 32,
     marginTop: 15,
+    color: "#000",
+    fontWeight: "300",
+    fontSize: 24,
   },
+
   textField: {
     borderColor: "#000",
     borderWidth: 1,
@@ -106,30 +133,34 @@ const styles = StyleSheet.create({
     height: 50,
     paddingHorizontal: 10,
   },
+
   button: {
-    backgroundColor: "#778eec",
-    borderRadius: 10,
+    backgroundColor: "blue",
+    borderRadius: 16,
     width: "80%",
     height: 50,
     alignItems: "center",
     justifyContent: "center",
     textAlign: "center",
   },
+
   rodape: {
     flexDirection: "row",
     width: "62.75%",
     justifyContent: "space-evenly",
     alignItems: "center",
+    gap: 20,
   },
 
   rodapeText: {
-    fontSize: 11,
-  },
-  buttonText : {
     fontSize: 18,
-    color: "red",
-    fontWeight: "bold"
-  }
+    fontWeight: "bold",
+  },
+
+  buttonText: {
+    fontSize: 16,
+    color: "#fff",
+  },
 });
 
 export default Register;

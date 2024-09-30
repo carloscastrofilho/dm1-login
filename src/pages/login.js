@@ -7,59 +7,56 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
-import { LoginUsuario } from "../services/auth-firebase";
 import { getAllUser, newUserFatec } from "../services/realtime-database";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import AuthContext from "../contexts/auth";
 
-  const icon = require("../../assets/favicon.png");
+const icon = require("../../assets/logosi.png");
 
-  const Login = ({navigation}) => {  
+const Login = ({ navigation }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { LoginUser } = useContext(AuthContext);
 
-    const [ email, setEmail] = useState("");
-    const [ password, setPassword] = useState("");
+  const onGetAllUser = async () => {
+    const lista = getAllUser();
+  };
 
-    const onGetAllUser = async ()=>{
-      const lista = getAllUser()
-      // console.log(lista)
-    }
-  const onNewUserFatec = async () =>{
-    const newuser =  newUserFatec()
-  }
-  const onClickEntrar = async ()=>{  
-    console.log( email, password ) ;
-    const userLogin = await LoginUsuario(email, password);
-  }
+  const onNewUserFatec = async () => {
+    const newuser = newUserFatec();
+  };
 
-  const OnClickRegistrar = ()=>{
-    navigation.navigate('Registro', {name: 'registro'})
-  } 
-  
+  const onClickEntrar = async () => {
+    const userLogin = await LoginUser(email, password);
+  };
+
+  const OnClickRegistrar = () => {
+    navigation.navigate("Registro", { name: "registro" });
+  };
+
   return (
     <View style={styles.container}>
       <Image style={styles.image} source={icon} />
       <View style={styles.body}>
-        <Text style={styles.title}>Login 23/09/24</Text>
+        <Text style={styles.title}>Fatec - Aula 30/09</Text>
         <View style={styles.areaInput}>
           <TextInput
-            name = "email"
+            name="email"
             style={styles.textField}
             placeholder="Email"
             keyboardType="email-address"
-            onChangeText={ text => setEmail(text) }
+            onChangeText={(text) => setEmail(text)}
           />
           <TextInput
-            name = "password"
+            name="password"
             style={styles.textField}
             placeholder="Password"
             keyboardType="default"
             secureTextEntry
-            onChangeText={ text => setPassword(text)}
+            onChangeText={(text) => setPassword(text)}
           />
-          <TouchableOpacity style={styles.button}
-             onPress={onClickEntrar} >
-            <Text style={(styles.buttonText, { color: "#fff" })}>
-              Acessar
-            </Text>
+          <TouchableOpacity style={styles.button} onPress={onClickEntrar}>
+            <Text style={(styles.buttonText, { color: "#fff" })}>Acessar</Text>
           </TouchableOpacity>
 
           {/* <TouchableOpacity style={styles.button}
@@ -77,11 +74,15 @@ import { useState } from "react";
           </TouchableOpacity> */}
 
           <View style={styles.rodape}>
-            <Text style={styles.rodapeText}>Não possui conta?</Text>
-            
-            <TouchableOpacity onPress={OnClickRegistrar }>
-              <Text style={(styles.rodapeText, { color: "#00002" })}>
-                faça sua inscrição ...!
+            <Text style={styles.rodapeText}>Não possui conta? {"   "}</Text>
+            <TouchableOpacity onPress={OnClickRegistrar}>
+              <Text
+                style={
+                  (styles.rodapeText,
+                  { color: "#000", fontWeight: 700, fontSize: 16 })
+                }
+              >
+                Faça sua inscrição!
               </Text>
             </TouchableOpacity>
           </View>
@@ -89,8 +90,8 @@ import { useState } from "react";
       </View>
       <StatusBar style="auto" />
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -107,9 +108,11 @@ const styles = StyleSheet.create({
   },
 
   image: {
-    height: "20%",
-    width: "100%",
-    resizeMode: "contain",
+    height: 230, 
+    width: 230,  
+    borderRadius: 75, 
+    resizeMode: "cover", 
+    marginTop: 15,
   },
 
   areaInput: {
@@ -122,6 +125,9 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 32,
     marginTop: 15,
+    color: "#000",
+    fontWeight: "300",
+    fontSize: 24,
   },
 
   textField: {
@@ -134,8 +140,8 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    backgroundColor: "#778eec",
-    borderRadius: 10,
+    backgroundColor: "blue",
+    borderRadius: 16,
     width: "80%",
     height: 50,
     alignItems: "center",
@@ -156,11 +162,10 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 
-  buttonText : {
-    fontSize: 11,
+  buttonText: {
+    fontSize: 16,
     color: "red",
-  }
-
+  },
 });
 
 export default Login;

@@ -6,8 +6,8 @@ const Stack = createNativeStackNavigator();
 
 export default function AppRouters(){
    return(
-    <Stack.Navigator>
-        <Stack.Screen
+    <Stack.Navigator screenOptions={{headerShown: true}}>
+        <Stack.Screen          
           name="Login"
           component={Login}
           options={{title: 'Login acesso'}}

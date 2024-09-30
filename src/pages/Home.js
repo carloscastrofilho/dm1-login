@@ -8,36 +8,43 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
-import AuthContext from '../contexts/auth' 
+import AuthContext from '../contexts/auth'
 
 const icon = require("../../assets/favicon.png");
 
-const Home = ({navigation}) => {
-  const { signed, email, token } = useContext(AuthContext)
+const Home = ({ navigation }) => {
+  const { user, LogoutUser } = useContext(AuthContext);
+  console.log("home: ", user);
+
+  async function handleOnClickSair() {
+    // console.log("saindo: ", user);
+    await LogoutUser();
+  }
+
   return (
-      <View style={styles.container}>
-        
-        <View style={styles.body}>
-          <Text style={styles.title}>Home</Text>
-          <View style={styles.areaInput}>
+    <View style={styles.container}>
+
+      <View style={styles.body}>
+        <Text style={styles.title}>Home</Text>
+        <View style={styles.areaInput}>
           <Text>area principal</Text>
           <Text>  - - - - - - - - - - - - - </Text>
-          <Text> email : {email} </Text>
-          <Text> logado : {signed} </Text>
-          <Text> token : {token}</Text>
+          <Text> email : {user?.email} </Text>
+          <Text> logado : {user?.uuid} </Text>
+          <Text> token : {user?.token}</Text>
           <Text> - - - - - - - - - - - - - </Text>
-            
-            <TouchableOpacity style={styles.button}
-               onPress={() => navigation.navigate('Login', {name: 'Sair'}) }
-             >
-              <Text style={(styles.buttonText)}>
-                Sair / Finalizar
-              </Text>
-            </TouchableOpacity>
-          </View>
+
+          <TouchableOpacity style={styles.button}
+            onPress={handleOnClickSair}
+          >
+            <Text style={(styles.buttonText)}>
+              Sair / Finalizar
+            </Text>
+          </TouchableOpacity>
         </View>
-        <StatusBar style="auto" />
       </View>
+      <StatusBar style="auto" />
+    </View>
   );
 }
 

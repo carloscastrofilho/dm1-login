@@ -1,30 +1,33 @@
 import {
 	signInWithEmailAndPassword,
 	createUserWithEmailAndPassword,
+	onAuthStateChanged,
 } from "firebase/auth";
 import { auth } from "../services/database/firebase";
+//  
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useContext } from "react";
-import AuthContext from "../contexts/auth";
-import { set } from "firebase/database";
+// import { set } from "firebase/database";
 
-export async function LoginUsuario(email, password) {
-	// const { setSigned, setUserEmail } = useContext(AuthContext);
+export async function loginUsuario(email, password) {
+	//console.log( email, password );
 	const usuario = await signInWithEmailAndPassword(
 		auth,
 		email,
 		password,
 	);
-	console.log(usuario);
-	// if (usuario) {
-	// 	// setSigned( true )
-	// 	// setUserEmail( usuario.email)
-	// }
-	
+	if (usuario) {
+		try {
+			const token = usuario.accessToken;
+			//console.log(token)
+			return ( usuario )
+		} catch (error) {
+			console.log( error)	
+		}	   
+	}	
 	return usuario;
 }
 
-export async function LogoutUsuaro() {
+export async function logoutUsuario() {
 	auth.signOut();
 	// Limpa todo o AsyncStorage
 	AsyncStorage.clear()
@@ -36,17 +39,18 @@ export async function LogoutUsuaro() {
 		});
 }
 
-export async function RegistarUsuario(email, password) {
-	await createUserWithEmailAndPassword(auth, email, password)
-		.then((userCredential) => {
-			// Signed in
-			const user = userCredential.user;
-			// ...
-			console.log(user);
-		})
-		.catch((error) => {
-			const errorCode = error.code;
-			const errorMessage = error.message;
-			// ..
-		});
+export async function registarUsuario(email, password) {
+	const usuario = await createUserWithEmailAndPassword(auth, email, password)
+	if ( usuario) {
+		try {
+			return ( usuario )
+		} catch (error) {
+			console.log( error)	
+		}	
+	}
+}
+
+export async function UsuarioLogado(email, password) {    
+	const userCredential = await onAuthStateChanged( auth, (user)) ;
+	return userCredential;
 }
