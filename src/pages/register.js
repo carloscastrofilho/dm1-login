@@ -7,16 +7,20 @@ import {
   Image,
   TouchableOpacity,
   TextInput,
+  ScrollView,
 } from "react-native";
 import AuthContext from "../contexts/auth";
+import { newPerson } from "../services/personService";
 
 const icon = require("../../assets/logosi.png");
 
-const Register= ({navigation}) => {
-
+const Register = ({navigation}) => {
+  const [ nome, setNome] = useState("");
+  const [ telefone, setTelefone] = useState("");
   const [ email, setEmail] = useState("");
   const [ password, setPassword] = useState("")
   const [ password2, setPassword2] = useState("")
+
   const { createUser } = useContext(AuthContext)
 
   const handleReturnLogin = () => {
@@ -24,16 +28,41 @@ const Register= ({navigation}) => {
   }
   
   async function handleOnClick(){
-    const usuario = await createUser(email, password);
+  //
+    const usuario = await createUser(email, password, nome, telefone );
+    // if ( usuario ) {
+    //    const uuid = usuario?.user?.uid;
+    //    console.log(usuario);
+    //    const person =  newPerson(nome, email,  uuid , telefone );
+    // }
     // console.log(usuario);
   }
 
   return (
-   <View style={styles.container}>
-     <Image style={styles.image} source={icon} />
-     <View style={styles.body}>
+   <ScrollView>
+    <View style={styles.container}>
+       <Image style={styles.image} source={icon} />
+       
+       <View style={styles.body}>
+
        <Text style={styles.title}>Registro</Text>
+
        <View style={styles.areaInput}>
+       <TextInput
+           name="nome"
+           style={styles.textField}
+           placeholder=" informe seu nome"
+           keyboardType="default"
+           onChangeText={ text => setNome(text) }
+         />
+         <TextInput
+           name="telefone"
+           style={styles.textField}
+           placeholder=" informe seu telefone"
+           keyboardType="phone-pad"
+           onChangeText={ text => setTelefone(text) }
+         />
+
          <TextInput
            name="email"
            style={styles.textField}
@@ -57,6 +86,7 @@ const Register= ({navigation}) => {
            secureTextEntry
            onChangeText={ text => setPassword2(text) }
          />
+
          <TouchableOpacity style={styles.button}
           onPress={() => handleOnClick() }
          >
@@ -71,7 +101,7 @@ const Register= ({navigation}) => {
               <Text
                 style={
                   (styles.rodapeText,
-                  { color: "#000", fontWeight: 700, fontSize: 16 })
+                  { color: "red", fontWeight: 700, fontSize: 16 })
                 }
               >
                 Voltar ao login
@@ -84,7 +114,9 @@ const Register= ({navigation}) => {
        </View>
      </View>
      <StatusBar style="auto" />
-   </View>
+    </View>
+   </ScrollView>
+
   );
 }
   
@@ -114,6 +146,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "80%",
     alignItems: "center",
+    gap: 20,
     justifyContent: "space-evenly",
   },
 

@@ -27,7 +27,7 @@ const Login = ({ navigation }) => {
   };
 
   const onClickEntrar = async () => {
-    const userLogin = await LoginUser(email, password);
+    const userLogin = await LoginUser(email, password);    
   };
 
   const OnClickRegistrar = () => {
@@ -38,7 +38,7 @@ const Login = ({ navigation }) => {
     <View style={styles.container}>
       <Image style={styles.image} source={icon} />
       <View style={styles.body}>
-        <Text style={styles.title}>Fatec - Aula 30/09</Text>
+        <Text style={styles.title}>Fatec - Aula 21/10</Text>
         <View style={styles.areaInput}>
           <TextInput
             name="email"
@@ -58,8 +58,8 @@ const Login = ({ navigation }) => {
           <TouchableOpacity style={styles.button} onPress={onClickEntrar}>
             <Text style={(styles.buttonText, { color: "#fff" })}>Acessar</Text>
           </TouchableOpacity>
-
-          {/* <TouchableOpacity style={styles.button}
+{/* 
+          <TouchableOpacity style={styles.button}
              onPress={onNewUserFatec} >
             <Text style={(styles.buttonText, { color: "#fff" })}>
               teste
@@ -79,7 +79,7 @@ const Login = ({ navigation }) => {
               <Text
                 style={
                   (styles.rodapeText,
-                  { color: "#000", fontWeight: 700, fontSize: 16 })
+                  { color: "red", fontWeight: 700, fontSize: 16 })
                 }
               >
                 Faça sua inscrição!
